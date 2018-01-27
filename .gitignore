@@ -1,0 +1,4 @@
+.DS_Store
+displayWrapper/Build/*
+displayWrapper/Index/*
+displayWrapper/displayWrapper/rgb_matrix/images/*
