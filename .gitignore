@@ -1,4 +1,8 @@
 .DS_Store
-displayWrapper/Build/*
-displayWrapper/Index/*
+displayWrapper/Build/**
+displayWrapper/Index/**
 displayWrapper/displayWrapper/rgb_matrix/images/*
+displayWrapper/displayWrapper.xcodeproj/project.xcworkspace/**
+displayWrapper/displayWrapper.xcodeproj/xcuserdata/**
+displayClient/displayClient.xcodeproj/project.xcworkspace/**
+displayClient/displayClient.xcodeproj/xcuserdata/**
