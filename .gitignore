@@ -5,6 +5,7 @@
 rpi-rgb-led-matrix/led-matrix
 rpi-rgb-led-matrix/minimal-example
 rpi-rgb-led-matrix/text-example
+rpi-rgb-led-matrix/bonzesPoste
 displayWrapper/Build/**
 displayWrapper/Index/**
 displayWrapper/displayWrapper/rgb_matrix/images/*

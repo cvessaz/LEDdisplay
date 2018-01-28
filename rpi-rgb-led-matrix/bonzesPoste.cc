@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <ctime>
 #include <map>
+#include <iostream>
+#include <sys/socket.h>
+#include <arpa/inet.h>
 #include <thread>
 #include <mutex>
 
@@ -19,6 +22,7 @@ struct Params {
   bool paused=false;
   Color color=Color(255, 0, 0);
 };
+Params params;
 std::string fontName="10x20.bdf";
 int desk[4] = {0,0,0,0};
 char label[4] = {'A','B','C','D'};
@@ -42,8 +46,10 @@ int main(int argc, char *argv[]) {
     return 1;
   
   RGBMatrix *canvas = new RGBMatrix(&io, 32, 8); // rows 32 / chain 8
-  //canvas->SetPWMBits(1); // if all_extreme_colors in text-example
-  
+#if 0
+  canvas->SetPWMBits(1); // if all_extreme_colors in text-example
+#endif
+
 #if 1
   int waitTest = 5;
   canvas->Clear();
@@ -108,7 +114,12 @@ void UpdateDeskLoop(RGBMatrix &canvas, const Font &font, const std::map<int,std:
   } else {
     sprintf(line, "%c %4d", label[d],params.i);
   }
+#if 0
+  // FIXME add partial clear method or redraw all frame
   canvas.Clear(12, (d*32), 52, 32);
+#else
+  canvas.Clear();
+#endif
   DrawText(&canvas, font, 2, (d*32)+6 + font.baseline(),  params.color, line);
 }
 
