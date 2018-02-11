@@ -113,9 +113,29 @@ int RGBMatrix::width() const { return frame_->width(); }
 int RGBMatrix::height() const { return frame_->height(); }
 void RGBMatrix::SetPixel(int x, int y,
                          uint8_t red, uint8_t green, uint8_t blue) {
+#if 1 // Re-orient x,y for bonzesPoste
+  int xo, yo;
+  if (x<32) {
+    xo = 127-y;
+    yo = x;
+  }
+  else {
+    xo = y+128;
+    yo = 63-x;
+  }
+  frame_->SetPixel(xo, yo, red, green, blue);
+#else
   frame_->SetPixel(x, y, red, green, blue);
+#endif
 }
 void RGBMatrix::Clear() { return frame_->Clear(); }
+void RGBMatrix::Clear(const int &x0, const int &y0, const int &nx, const int &ny) {
+  for (int y=y0; y<y0+ny; ++y) {
+    for (int x=x0; x<x0+nx; ++x) {
+      SetPixel(x,y,0,0,0);
+    }
+  }
+}
 void RGBMatrix::Fill(uint8_t red, uint8_t green, uint8_t blue) {
   frame_->Fill(red, green, blue);
 }

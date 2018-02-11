@@ -23,7 +23,7 @@ struct Params {
   Color color=Color(255, 0, 0);
 };
 Params params;
-std::string fontName="10x20.bdf";
+std::string fontName="fonts/10x20.bdf";
 int desk[4] = {0,0,0,0};
 char label[4] = {'A','B','C','D'};
 std::map<int,std::string> specialChar = {
@@ -38,19 +38,29 @@ void communicate();
 
 int main(int argc, char *argv[]) {
   Font font;
-  if (!font.LoadFont(fontName.c_str()))
-    return 1;
+  if (!font.LoadFont(fontName.c_str())) {
+	  std::cout << "FONT ERROR" << std::endl;
+	  return 1;
+  }
   
   GPIO io;
-  if (!io.Init())
-    return 1;
+  if (!io.Init()) {	  
+	  std::cout << "GPIO ERROR" << std::endl;
+	  return 1;
+  }
   
   RGBMatrix *canvas = new RGBMatrix(&io, 32, 8); // rows 32 / chain 8
-#if 0
+#if 1
   canvas->SetPWMBits(1); // if all_extreme_colors in text-example
 #endif
 
-#if 1
+#if 0
+  canvas->SetPixel(0,0,255,0,0);
+  canvas->SetPixel(63,0,0,255,0);
+  canvas->SetPixel(0,127,0,0,255);
+  canvas->SetPixel(63,127,255,255,255);
+  sleep(30);
+#if 0
   int waitTest = 5;
   canvas->Clear();
   canvas->Fill(255, 0, 0);
@@ -65,6 +75,7 @@ int main(int argc, char *argv[]) {
   canvas->Fill(255, 255, 255);
   sleep(waitTest);
   canvas->Clear();
+#endif
 #else
   srand((unsigned int)time(NULL));
   std::thread rc(communicate);
@@ -114,12 +125,7 @@ void UpdateDeskLoop(RGBMatrix &canvas, const Font &font, const std::map<int,std:
   } else {
     sprintf(line, "%c %4d", label[d],params.i);
   }
-#if 0
-  // FIXME add partial clear method or redraw all frame
   canvas.Clear(12, (d*32), 52, 32);
-#else
-  canvas.Clear();
-#endif
   DrawText(&canvas, font, 2, (d*32)+6 + font.baseline(),  params.color, line);
 }
 

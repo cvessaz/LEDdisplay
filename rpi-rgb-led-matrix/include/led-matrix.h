@@ -56,6 +56,7 @@ public:
   virtual void SetPixel(int x, int y,
                         uint8_t red, uint8_t green, uint8_t blue);
   virtual void Clear();
+  void Clear(const int &x0, const int &y0, const int &nx, const int &ny);
   virtual void Fill(uint8_t red, uint8_t green, uint8_t blue);
 
 private:
