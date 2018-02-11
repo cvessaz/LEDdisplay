@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     //outputTextField.scrollRangeToVisible(NSMakeRange(stringLength-1, 0))
     
     var address = in_addr()
-    inet_pton(AF_INET, "127.0.0.1", &address)
+    inet_pton(AF_INET, "10.0.0.1", &address)
     let port: CUnsignedShort = 1111
     
     func htons(value: CUnsignedShort) -> CUnsignedShort {
