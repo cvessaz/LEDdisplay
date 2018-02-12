@@ -60,6 +60,7 @@ int main(int argc, char *argv[]) {
   while (true) {
     mu.lock();
     if (params.i==0||params.i>params.N) {
+      canvas->Clear();
       InitializeDeskLoop(*canvas,font);
       params.i=0;
     }
@@ -183,7 +184,7 @@ void communicate() {
             }
             int s = std::min(100,std::max(0,std::stoi(ss)));
             mu.lock();
-            params.waitMax = params.waitMin + (double)(100-s)/10.0;
+            params.waitMax = params.waitMin + (double)(101-s)/10.0;
             mu.unlock();
           }
           break;
