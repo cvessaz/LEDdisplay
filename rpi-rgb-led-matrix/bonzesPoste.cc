@@ -14,11 +14,11 @@ using namespace rgb_matrix;
 
 struct Params {
   float t=0.0;
-  float tMax=60.0;
+  float tMax=180.0;
   float waitMin=1.0;
   float waitMax=5.0;
   int i=0;
-  int N=100;
+  int N=999;
   bool paused=false;
   Color color=Color(255, 0, 0);
 };
@@ -54,29 +54,7 @@ int main(int argc, char *argv[]) {
   canvas->SetPWMBits(1); // if all_extreme_colors in text-example
 #endif
 
-#if 0
-  canvas->SetPixel(0,0,255,0,0);
-  canvas->SetPixel(63,0,0,255,0);
-  canvas->SetPixel(0,127,0,0,255);
-  canvas->SetPixel(63,127,255,255,255);
-  sleep(30);
-#if 0
-  int waitTest = 5;
-  canvas->Clear();
-  canvas->Fill(255, 0, 0);
-  sleep(waitTest);
-  canvas->Clear();
-  canvas->Fill(0, 255, 0);
-  sleep(waitTest);
-  canvas->Clear();
-  canvas->Fill(0, 0, 255);
-  sleep(waitTest);
-  canvas->Clear();
-  canvas->Fill(255, 255, 255);
-  sleep(waitTest);
-  canvas->Clear();
-#endif
-#else
+#if 1
   srand((unsigned int)time(NULL));
   std::thread rc(communicate);
   while (true) {
@@ -146,7 +124,7 @@ void communicate() {
   setsockopt(socket_info,SOL_SOCKET,SO_RCVTIMEO,(char*)&timeout,sizeof(struct timeval));
   
   //assign values
-  server.sin_addr.s_addr = inet_addr("127.0.0.1");
+  server.sin_addr.s_addr = inet_addr("10.0.0.1");
   server.sin_family = AF_INET;
   server.sin_port = htons( 1111 );
   
@@ -165,6 +143,7 @@ void communicate() {
     // Wait for message
     if (recv(socket_info, incoming_message, sizeof(incoming_message), 0) > 0) {
       std::string cmd = incoming_message;
+      std::cout << "Received: " << cmd << std::endl;
       int cmdLength = (int)cmd.length();
       if (cmdLength<=0) continue;
       
