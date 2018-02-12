@@ -82,6 +82,9 @@ int main(int argc, char *argv[]) {
   rc.join();
 #endif
   
+  canvas->Clear();
+  delete canvas;
+
   return 0;
 }
 
