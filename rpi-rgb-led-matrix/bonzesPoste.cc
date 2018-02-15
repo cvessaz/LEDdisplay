@@ -18,7 +18,7 @@ struct Params {
   float waitMin=1.0;
   float waitMax=5.0;
   int i=0;
-  int N=999;
+  int N=299;
   bool paused=false;
   Color color=Color(255, 0, 0);
 };
@@ -27,8 +27,32 @@ std::string fontName="fonts/10x20.bdf";
 int desk[4] = {0,0,0,0};
 char label[4] = {'A','B','C','D'};
 std::map<int,std::string> specialChar = {
-  {9, "  √81"},
-  {18, " 180%"}
+  {9,  "  √81"},
+  {18, " 180%"},
+  {23, " STOP"},
+  {35, " --->"},
+  {52, " ⍺=52"},
+  {73, " NEXT"},
+  {88, "   &&"},
+  {102," ????"},
+  {113," ~113"},
+  {136," @@@@"},
+  {177,"  1+1"},
+  {183," ####"},
+  {194," <---"},
+  {203," ????"},
+  {218," !%*£"},
+  {229," $$$$"},
+  {242," WAIT"},
+  {291," 9991"},
+  {292," 9992"},
+  {293," 9993"},
+  {294," 9994"},
+  {295," 9995"},
+  {296," 9996"},
+  {297," 9997"},
+  {298," 9998"},
+  {299," 9999"}
 };
 std::mutex mu;
 
@@ -76,9 +100,11 @@ int main(int argc, char *argv[]) {
     if (endTime<waitTime) {
       sleep(waitTime-endTime);
     }
+#if 0
     if (params.t>=params.tMax) {
       break;
     }
+#endif
   }
   rc.join();
 #endif
@@ -139,10 +165,12 @@ void communicate() {
   
   //Receive an incoming message
   while (true) {
+#if 0
     // exit
     if (params.t>=params.tMax) {
       break;
     }
+#endif
     
     // Wait for message
     if (recv(socket_info, incoming_message, sizeof(incoming_message), 0) > 0) {
