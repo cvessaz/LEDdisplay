@@ -7,6 +7,7 @@
 //
 
 #include <unistd.h>
+#include <vector>
 #include <ctime>
 #include <map>
 #include <thread>
@@ -21,77 +22,52 @@
 
 Params params;
 std::string fontName="10x20.bdf";
-int desk[4] = {0,0,0,0};
-char label[4] = {'A','B','C','D'};
-std::map<int,std::string> specialChar = {
-  {9, "  √81"},
-  {18, " 180%"}
-};
 std::mutex mu;
 
-void InitializeDeskLoop(RGBMatrix &canvas, const Font &font) {
-  for (int i=0; i<4; ++i) {
-    char line[2];
-    sprintf(line, "%c", label[i]);
-    DrawText(&canvas, font, 2, (i*32)+6 + font.baseline(),  params.color, line);
-  }
-}
-
-void UpdateDeskLoop(RGBMatrix &canvas, const Font &font, const std::map<int,std::string> &specialChar) {
-  unsigned int a = rand();
-  int d = a % 4;
-  char line[100];
-  auto it = specialChar.find(params.i);
-  if (it!=specialChar.end()) {
-    sprintf(line, "%c%s", label[d],it->second.c_str());
-  } else {
-    sprintf(line, "%c %4d", label[d],params.i);
-  }
-  canvas.Clear(12, (d*32), 52, 32);
-  DrawText(&canvas, font, 2, (d*32)+6 + font.baseline(),  params.color, line);
-}
+class Data {
+public:
+  std::vector<std::vector<Color>> pixels;
+  
+  Data() {};
+  ~Data() {};
+  
+  void initialize() {};
+  
+  void update() {};
+};
 
 int main(int argc, const char * argv[]) {
+  
+  // Initialize display, data and communication
   auto canvas = RGBMatrix();
   Font font;
   font.LoadFont(fontName.c_str());
-  srand((unsigned int)time(NULL));
+  Data text;
   std::thread rc(communicate);
-#ifdef __APPLE__
-  int f=0;
-  int frameRate=25;
-#endif
+
+  // Main loop
+  double elapseTime = std::clock();
   while (true) {
-    mu.lock();
-    if (params.i==0||params.i>params.N) {
-      InitializeDeskLoop(canvas,font);
-      params.i=0;
+    // Cleared
+    if (params.isCleared) {
+      text.initialize();
+      elapseTime = std::clock();
     }
-    auto startTime = std::clock();
-    if (!params.paused) {
-      ++params.i;
-      UpdateDeskLoop(canvas,font,specialChar);
+    
+    // Update
+    double pixelDiff = (std::clock()-elapseTime)*params.speed;
+    if (pixelDiff>=1.0) {
+      text.update();
+      elapseTime = std::clock();
+      if (pixelDiff>=2.0) assert(false);
     }
-    auto waitTime = params.waitMin + (rand()/(RAND_MAX/(params.waitMax-params.waitMin)));
-    params.t += waitTime;
-#ifdef __APPLE__
-    for (auto s=0;s<(int)(waitTime*frameRate); ++s) {
-      canvas.Save(f);
-      ++f;
-    }
-#endif
-    mu.unlock();
-    auto endTime = (std::clock() - startTime) / (float)CLOCKS_PER_SEC;
-    if (endTime<waitTime) {
-      sleep(waitTime-endTime);
-    }
-    if (params.t>=params.tMax) {
-      break;
-    }
+    
+    // Exit
+    if (params.isStopped) break;
   }
-#ifdef __APPLE__
-  canvas.Movie();
-#endif
+
+  // End communication
   rc.join();
+  
   return 0;
 }

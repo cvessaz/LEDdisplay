@@ -63,12 +63,12 @@ class ViewController: UIViewController {
     udpSend(textToSend: cmd)
   }
   
-  @IBAction func sendRestart(_ sender: UIButton) {
+  @IBAction func sendRefresh(_ sender: UIButton) {
     let cmd = "r"
     udpSend(textToSend: cmd)
   }
   
-  @IBAction func sendPause(_ sender: UIButton) {
+  @IBAction func sendStop(_ sender: UIButton) {
     let cmd = "p"
     udpSend(textToSend: cmd)
   }
