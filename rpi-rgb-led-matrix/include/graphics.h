@@ -9,6 +9,7 @@
 
 #include "canvas.h"
 
+#include <vector>
 #include <map>
 #include <stdint.h>
 
@@ -47,6 +48,8 @@ public:
   // Returns how much we advance on the screen, which is the width of the
   // character or 0 if we didn't draw any chracter.
   int DrawGlyph(Canvas *c, int x, int y, const Color &color,
+                uint32_t unicode_codepoint) const;
+  int DrawGlyph(std::vector<std::pair<int,int>>& pixels, int x, int y,
                 uint32_t unicode_codepoint) const;
 private:
   struct Glyph;
