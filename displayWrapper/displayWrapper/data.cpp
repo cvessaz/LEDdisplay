@@ -21,10 +21,10 @@ Data::Data(RGBMatrix* _canvas, const int &_fontWidth, const int &_fontHeight) {
   fontHeight = _fontHeight;
   xMax = std::max((int)text->size()*fontWidth,canvas->width());
   initialize();
-};
+}
 
 Data::~Data() {
-};
+}
 
 void Data::initialize() {
   if (pixels.size()>0) {
@@ -40,7 +40,7 @@ void Data::initialize() {
     x += font.DrawGlyph(pixels, x, y, cp);
   }
   update(0);
-};
+}
 
 void Data::update(const int &dx) {
   if (dx>0) {
@@ -60,4 +60,4 @@ void Data::update(const int &dx) {
 #ifdef __APPLE__
   canvas->Refresh();
 #endif
-};
+}
