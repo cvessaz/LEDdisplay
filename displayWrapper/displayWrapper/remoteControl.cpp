@@ -74,6 +74,7 @@ void communicate() {
             int b = std::min(255,std::max(0,std::stoi(bs)));
             mu.lock();
             params.color = Color(r,g,b);
+            params.isCleared = true;
             mu.unlock();
           }
           break;

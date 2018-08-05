@@ -7,13 +7,12 @@
 //
 
 #include <unistd.h>
-#include <vector>
 #include <ctime>
-#include <map>
 #include <thread>
 #include <mutex>
 
 #include "global.h"
+#include "data.h"
 #include "remoteControl.h"
 #ifdef __APPLE__
 #include "rgb_matrix.h"
@@ -21,28 +20,15 @@
 #endif
 
 Params params;
-std::string fontName="10x20.bdf";
+int fontWidth = 10;
+int fontHeight = 20;
 std::mutex mu;
-
-class Data {
-public:
-  std::vector<std::vector<Color>> pixels;
-  
-  Data() {};
-  ~Data() {};
-  
-  void initialize() {};
-  
-  void update() {};
-};
 
 int main(int argc, const char * argv[]) {
   
   // Initialize display, data and communication
   auto canvas = RGBMatrix();
-  Font font;
-  font.LoadFont(fontName.c_str());
-  Data text;
+  Data text(&canvas, fontWidth, fontHeight);
   std::thread rc(communicate);
 
   // Main loop
@@ -50,16 +36,21 @@ int main(int argc, const char * argv[]) {
   while (true) {
     // Cleared
     if (params.isCleared) {
-      text.initialize();
       elapseTime = std::clock();
+      mu.lock();
+      text.initialize();
+      params.isCleared = false;
+      mu.unlock();
     }
     
     // Update
-    double pixelDiff = (std::clock()-elapseTime)*params.speed;
+    if (params.speed==0) elapseTime = std::clock();
+    double pixelDiff = (std::clock()-elapseTime)/CLOCKS_PER_SEC*params.speed;
     if (pixelDiff>=1.0) {
-      text.update();
       elapseTime = std::clock();
-      if (pixelDiff>=2.0) assert(false);
+      mu.lock();
+      text.update((int)pixelDiff);
+      mu.unlock();
     }
     
     // Exit

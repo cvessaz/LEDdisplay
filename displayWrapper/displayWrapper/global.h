@@ -12,7 +12,7 @@
 #include "bdfPrinter.h"
 
 struct Params {
-  std::string text = "";
+  std::string text = "Hello world!";
   Color color=Color(255, 0, 0);
   double speed = 0;
   bool isCleared = false;
