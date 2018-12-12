@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A003A5B1200FF01E003F69F8 /* remoteControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A003A5AF200FF01E003F69F8 /* remoteControl.cpp */; };
+		A0290A71211B780E0009D67B /* localControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0290A6F211B780E0009D67B /* localControl.cpp */; };
 		A05F411A2006C100009D70C0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A546DB1FEF059500C2984D /* Cocoa.framework */; };
 		A05F411B2006C109009D70C0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A546D91FEF058800C2984D /* OpenGL.framework */; };
 		A05F411F2006C2CE009D70C0 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F411E2006C2CD009D70C0 /* libGLEW.a */; };
@@ -45,6 +46,8 @@
 		A0060DA31FFED79400DCB00E /* fragmentShader.fsgl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fragmentShader.fsgl; sourceTree = "<group>"; };
 		A00D10F51FF12CEF00AA43AE /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../../../opt/local/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		A0120F82200FF4E000F604AE /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
+		A0290A6F211B780E0009D67B /* localControl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = localControl.cpp; sourceTree = "<group>"; };
+		A0290A70211B780E0009D67B /* localControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = localControl.h; sourceTree = "<group>"; };
 		A05F411E2006C2CD009D70C0 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../opt/local/lib/libGLEW.a; sourceTree = "<group>"; };
 		A06A08E220091B160059CAA3 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
 		A06A08E320091B160059CAA3 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				A0A8B40D2116DF4A007DE382 /* data.cpp */,
 				A003A5B0200FF01E003F69F8 /* remoteControl.h */,
 				A003A5AF200FF01E003F69F8 /* remoteControl.cpp */,
+				A0290A70211B780E0009D67B /* localControl.h */,
+				A0290A6F211B780E0009D67B /* localControl.cpp */,
 				A0D7EB992006B3D800C566FA /* rgb_matrix */,
 			);
 			path = displayWrapper;
@@ -305,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0A546D21FEF03FF00C2984D /* main.cpp in Sources */,
+				A0290A71211B780E0009D67B /* localControl.cpp in Sources */,
 				A003A5B1200FF01E003F69F8 /* remoteControl.cpp in Sources */,
 				A0A8B40F2116DF4A007DE382 /* data.cpp in Sources */,
 			);

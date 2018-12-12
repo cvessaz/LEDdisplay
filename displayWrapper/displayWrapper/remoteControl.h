@@ -9,12 +9,6 @@
 #ifndef remoteControl_h
 #define remoteControl_h
 
-#include <iostream>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include "bdfPrinter.h"
-
 void communicate();
 
 #endif /* remoteControl_h */

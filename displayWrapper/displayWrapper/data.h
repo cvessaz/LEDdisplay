@@ -10,9 +10,9 @@
 #define data_h
 
 #include <vector>
-#include <sstream>
+#ifdef __APPLE__
 #include "rgb_matrix.h"
-#include "bdfPrinter.h"
+#endif
 
 class Data {
 public:

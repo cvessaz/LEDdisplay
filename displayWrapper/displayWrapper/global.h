@@ -9,7 +9,9 @@
 #ifndef global_h
 #define global_h
 
+#ifdef __APPLE__
 #include "bdfPrinter.h"
+#endif
 
 struct Params {
   std::string text = "Hello world!";

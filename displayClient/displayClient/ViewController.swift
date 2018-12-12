@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     //outputTextField.scrollRangeToVisible(NSMakeRange(stringLength-1, 0))
     
     var address = in_addr()
-    inet_pton(AF_INET, "10.0.0.1", &address)
+    inet_pton(AF_INET, "10.0.0.1", &address) // 127.0.0.1
     let port: CUnsignedShort = 1111
     
     func htons(value: CUnsignedShort) -> CUnsignedShort {
@@ -100,9 +100,10 @@ class ViewController: UIViewController {
     
     textToSend.withCString { cstr -> Void in
       let sent: (Int) = withUnsafePointer(to: &addr) {
+        let len = socklen_t(MemoryLayout<sockaddr_in>.size)
         let broadcastMessageLength = Int(strlen(cstr)+1)
         let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
-        return sendto(fd, cstr, broadcastMessageLength, 0, p, socklen_t(addr.sin_len))
+        return sendto(fd, cstr, broadcastMessageLength, 0, p, len)
       }
       print("Sent size: \(sent)")
     }

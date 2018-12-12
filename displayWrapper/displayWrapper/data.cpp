@@ -6,8 +6,9 @@
 //  Copyright © 2018 Christian Vessaz. All rights reserved.
 //
 
-#include "data.h"
+#include <sstream>
 #include "global.h"
+#include "data.h"
 
 Data::Data(RGBMatrix* _canvas, const int &_fontWidth, const int &_fontHeight) {
   canvas = _canvas;

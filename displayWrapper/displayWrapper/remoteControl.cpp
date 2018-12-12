@@ -6,8 +6,9 @@
 //  Copyright © 2018 Christian Vessaz. All rights reserved.
 //
 
-#include "remoteControl.h"
+#include <arpa/inet.h>
 #include "global.h"
+#include "remoteControl.h"
 
 void communicate() {
   //initialize socket and structure
