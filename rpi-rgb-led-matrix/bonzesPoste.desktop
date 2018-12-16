@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=bonzesPoste
-Exec=/home/pi/Documents/startLEDbonzesPoste
+Exec=/home/pi/Documents/LEDdisplay/rpi-rgb-led-matrix/startLEDbonzesPoste

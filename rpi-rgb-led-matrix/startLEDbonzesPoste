@@ -1,0 +1,6 @@
+#!/bin/bash
+cd /home/pi/Documents/LEDdisplay/rpi-rgb-led-matrix
+make clean
+make -j4
+sudo ./bonzesPoste
+cd
