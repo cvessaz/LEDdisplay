@@ -11,6 +11,8 @@
 
 #ifdef __APPLE__
 #include "rgb_matrix.h"
+#else
+#include "../../rpi-rgb-led-matrix/include/led-matrix.h"
 #endif
 
 void displayControl(RGBMatrix &canvas);
