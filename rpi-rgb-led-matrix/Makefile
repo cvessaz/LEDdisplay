@@ -1,5 +1,5 @@
 CXXFLAGS=-Wall -O3 -g -fno-strict-aliasing
-BINARIES=led-matrix minimal-example text-example bonzesPoste rgbmatrix.so
+BINARIES=led-matrix minimal-example text-example bonzesPoste displayText rgbmatrix.so
 
 # Where our library resides. It is split between includes and the binary
 # library in lib
@@ -25,6 +25,9 @@ text-example : text-example.o $(RGB_LIBRARY)
 
 bonzesPoste : bonzesPoste.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) bonzesPoste.o -o $@ $(LDFLAGS)
+
+displayText : displayText.o $(RGB_LIBRARY)
+	$(CXX) $(CXXFLAGS) displayText.o -o $@ $(LDFLAGS)
 
 # Python module
 rgbmatrix.so: rgbmatrix.o $(RGB_LIBRARY)
