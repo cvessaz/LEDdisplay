@@ -126,6 +126,24 @@ int Font::DrawGlyph(RGBMatrix *c, int x_pos, int y_pos, const Color &color,
   }
   return g->width;
 }
+int Font::DrawGlyph(std::vector<std::pair<int,int>>& pixels, int x_pos, int y_pos,
+                    uint32_t unicode_codepoint) const {
+  const Glyph *g = FindGlyph(unicode_codepoint);
+  if (g == NULL) g = FindGlyph(kUnicodeReplacementCodepoint);
+  if (g == NULL) return 0;
+  y_pos = y_pos - g->height - g->y_offset;
+  for (int y = 0; y < g->height; ++y) {
+    const rowbitmap_t row = g->bitmap[y];
+    rowbitmap_t x_mask = 0x80000000;
+    for (int x = 0; x < g->width; ++x, x_mask >>= 1) {
+      if (row & x_mask) {
+        std::pair<int,int> pixel(x_pos + x, y_pos + y);
+        pixels.push_back(pixel);
+      }
+    }
+  }
+  return g->width;
+}
 
 int DrawText(RGBMatrix *c, const Font &font,
              int x, int y, const Color &color,

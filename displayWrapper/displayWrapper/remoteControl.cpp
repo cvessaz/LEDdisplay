@@ -6,8 +6,9 @@
 //  Copyright © 2018 Christian Vessaz. All rights reserved.
 //
 
-#include "remoteControl.h"
+#include <arpa/inet.h>
 #include "global.h"
+#include "remoteControl.h"
 
 void communicate() {
   //initialize socket and structure
@@ -38,7 +39,7 @@ void communicate() {
   //Receive an incoming message
   while (true) {
     // exit
-    if (params.t>=params.tMax) {
+    if (params.isStopped) {
       break;
     }
     
@@ -52,6 +53,12 @@ void communicate() {
       switch (cmd[0]) {
         // Received message
         case 'm':
+          if (cmdLength>2 && cmd[1]=='/') {
+            mu.lock();
+            params.text = cmd.substr(2, cmd.size()-2);
+            params.isCleared = true;
+            mu.unlock();
+          }
           break;
          
         // Received color
@@ -68,6 +75,7 @@ void communicate() {
             int b = std::min(255,std::max(0,std::stoi(bs)));
             mu.lock();
             params.color = Color(r,g,b);
+            params.isCleared = true;
             mu.unlock();
           }
           break;
@@ -79,9 +87,9 @@ void communicate() {
             for (int i=0; i<3; ++i) {
               ss.push_back(cmd[2+i]);
             }
-            int s = std::min(100,std::max(0,std::stoi(ss)));
+            int s = std::min(100.0,std::max(0.0,std::stod(ss)));
             mu.lock();
-            params.waitMax = params.waitMin + (double)(100-s)/10.0;
+            params.speed = s;
             mu.unlock();
           }
           break;
@@ -90,16 +98,16 @@ void communicate() {
         case 'r':
           if (cmdLength==1) {
             mu.lock();
-            params.i=0;
+            params.isCleared = true;
             mu.unlock();
           }
           break;
           
-        // Received pause
+        // Received stop
         case 'p':
           if (cmdLength==1) {
             mu.lock();
-            params.paused = params.paused ? false : true;
+            params.isStopped = true;
             mu.unlock();
           }
           break;

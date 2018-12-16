@@ -9,17 +9,16 @@
 #ifndef global_h
 #define global_h
 
+#ifdef __APPLE__
 #include "bdfPrinter.h"
+#endif
 
 struct Params {
-  float t=0.0;
-  float tMax=60.0;
-  float waitMin=1.0;
-  float waitMax=5.0;
-  int i=0;
-  int N=100;
-  bool paused=false;
+  std::string text = "Hello world!";
   Color color=Color(255, 0, 0);
+  double speed = 0;
+  bool isCleared = false;
+  bool isStopped = false;
 };
 extern Params params;
 

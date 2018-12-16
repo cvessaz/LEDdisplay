@@ -16,8 +16,8 @@
 #include "shader.h"
 #include "image.h"
 
-#define ScreenWidth 64
-#define ScreenHeight 128
+#define ScreenWidth 128
+#define ScreenHeight 64
 #define PixelSize 8
 
 class RGBMatrix{
