@@ -26,9 +26,6 @@ text-example : text-example.o $(RGB_LIBRARY)
 bonzesPoste : bonzesPoste.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) bonzesPoste.o -o $@ $(LDFLAGS)
 
-displayText : displayText.o $(RGB_LIBRARY)
-        $(CXX) $(CXXFLAGS) displayText.o -o $@ $(LDFLAGS)
-
 # Python module
 rgbmatrix.so: rgbmatrix.o $(RGB_LIBRARY)
 	$(CXX) -s -shared -lstdc++ -Wl,-soname,librgbmatrix.so -o $@ $< $(LDFLAGS)
