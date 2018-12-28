@@ -7,6 +7,7 @@
 //
 
 #include <sstream>
+#include <cassert>
 #include "global.h"
 #include "data.h"
 

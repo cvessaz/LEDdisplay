@@ -28,13 +28,13 @@ bonzesPoste : bonzesPoste.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) bonzesPoste.o -o $@ $(LDFLAGS)
 
 remoteControl.o : $(displayWrapper)/remoteControl.cpp
-  $(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 data.o : $(displayWrapper)/data.cpp
-  $(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -DADAFRUIT_RGBMATRIX_HAT -c -o $@ $<
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -DADAFRUIT_RGBMATRIX_HAT -c -o $@ $<
 
 localControl.o : $(displayWrapper)/localControl.cpp
-  $(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -DADAFRUIT_RGBMATRIX_HAT -c -o $@ $<
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -DADAFRUIT_RGBMATRIX_HAT -c -o $@ $<
 
 displayText : displayText.o remoteControl.o data.o localControl.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) displayText.o -o $@ $(LDFLAGS)

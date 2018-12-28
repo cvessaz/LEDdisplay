@@ -12,15 +12,14 @@ int main(int argc, char *argv[]) {
 	  std::cout << "GPIO ERROR" << std::endl;
 	  return 1;
   }
-  RGBMatrix *canvas = new RGBMatrix(&io, 32, 8); // rows 32 / chain 8
-  canvas->SetPWMBits(1); // if all_extreme_colors in text-example
+  auto canvas = RGBMatrix(&io, 32, 8); // rows 32 / chain 8
+  canvas.SetPWMBits(1); // if all_extreme_colors in text-example
 
   // Start local display control
   displayControl(canvas);
 
   // Cleanup
-  canvas->Clear();
-  delete canvas;
+  canvas.Clear();
 
   return 0;
 }

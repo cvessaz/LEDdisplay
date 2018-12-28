@@ -16,7 +16,7 @@
 #else
 #include "../../rpi-rgb-led-matrix/include/led-matrix.h"
 #include "../../rpi-rgb-led-matrix/include/graphics.h"
-using namespace RGBMatrix
+using namespace rgb_matrix;
 #endif
 
 class Data {
