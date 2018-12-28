@@ -13,6 +13,7 @@
 #include "rgb_matrix.h"
 #else
 #include "../../rpi-rgb-led-matrix/include/led-matrix.h"
+using namespace RGBMatrix
 #endif
 
 void displayControl(RGBMatrix &canvas);

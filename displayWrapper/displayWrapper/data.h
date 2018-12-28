@@ -12,6 +12,11 @@
 #include <vector>
 #ifdef __APPLE__
 #include "rgb_matrix.h"
+#include "bdfPrinter.h"
+#else
+#include "../../rpi-rgb-led-matrix/include/led-matrix.h"
+#include "../../rpi-rgb-led-matrix/include/graphics.h"
+using namespace RGBMatrix
 #endif
 
 class Data {

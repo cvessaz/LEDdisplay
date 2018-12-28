@@ -11,6 +11,9 @@
 
 #ifdef __APPLE__
 #include "bdfPrinter.h"
+#else
+#include "../../rpi-rgb-led-matrix/include/graphics.h"
+using namespace RGBMatrix
 #endif
 
 struct Params {

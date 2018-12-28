@@ -3,6 +3,7 @@ BINARIES=led-matrix minimal-example text-example bonzesPoste displayText rgbmatr
 
 # Where our library resides. It is split between includes and the binary
 # library in lib
+displayWrapper=../displayWrapper/displayWrapper
 RGB_INCDIR=include
 RGB_LIBDIR=lib
 RGB_LIBRARY_NAME=rgbmatrix
@@ -26,7 +27,16 @@ text-example : text-example.o $(RGB_LIBRARY)
 bonzesPoste : bonzesPoste.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) bonzesPoste.o -o $@ $(LDFLAGS)
 
-displayText : displayText.o $(RGB_LIBRARY)
+remoteControl.o : $(displayWrapper)/remoteControl.cpp
+  $(CXX) $(CXXFLAGS) -c -o $@ $<
+
+data.o : $(displayWrapper)/data.cpp
+  $(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -DADAFRUIT_RGBMATRIX_HAT -c -o $@ $<
+
+localControl.o : $(displayWrapper)/localControl.cpp
+  $(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -DADAFRUIT_RGBMATRIX_HAT -c -o $@ $<
+
+displayText : displayText.o remoteControl.o data.o localControl.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) displayText.o -o $@ $(LDFLAGS)
 
 # Python module
