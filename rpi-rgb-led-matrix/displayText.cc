@@ -1,7 +1,7 @@
 #include <iostream>
 #include "led-matrix.h"
 #include "graphics.h"
-#include "../displayWrapper/displayWrapper/localControl.h"
+#include "localControl.h"
 
 
 int main(int argc, char *argv[]) {

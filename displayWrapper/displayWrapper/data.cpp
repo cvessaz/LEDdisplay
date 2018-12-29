@@ -14,6 +14,9 @@
 Data::Data(RGBMatrix* _canvas, const int &_fontWidth, const int &_fontHeight) {
   canvas = _canvas;
   std::stringstream fontName;
+#ifndef __APPLE__
+  fontName << "./fonts/";
+#endif
   fontName << _fontWidth << "x" << _fontHeight << ".bdf";
   bool found = font.LoadFont(fontName.str().c_str());
   assert(found);

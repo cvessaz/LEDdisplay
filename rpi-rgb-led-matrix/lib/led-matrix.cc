@@ -113,7 +113,18 @@ int RGBMatrix::width() const { return frame_->width(); }
 int RGBMatrix::height() const { return frame_->height(); }
 void RGBMatrix::SetPixel(int x, int y,
                          uint8_t red, uint8_t green, uint8_t blue) {
-#if 1 // Re-orient x,y for bonzesPoste
+#if 1 // Re-orient x,y
+#if 1 // DisplayText
+  int xo, yo;
+  if (y<32) {
+    xo = x+128;
+    yo = y;
+  }
+  else {
+    xo = 127-x;
+    yo = 63-y;
+  }
+#else // BonzesPoste
   int xo, yo;
   if (x<32) {
     xo = 127-y;
@@ -123,6 +134,7 @@ void RGBMatrix::SetPixel(int x, int y,
     xo = y+128;
     yo = 63-x;
   }
+#endif
   frame_->SetPixel(xo, yo, red, green, blue);
 #else
   frame_->SetPixel(x, y, red, green, blue);
