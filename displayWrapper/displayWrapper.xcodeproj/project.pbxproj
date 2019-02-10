@@ -11,9 +11,6 @@
 		A0290A71211B780E0009D67B /* localControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0290A6F211B780E0009D67B /* localControl.cpp */; };
 		A05F411A2006C100009D70C0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A546DB1FEF059500C2984D /* Cocoa.framework */; };
 		A05F411B2006C109009D70C0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A546D91FEF058800C2984D /* OpenGL.framework */; };
-		A05F411F2006C2CE009D70C0 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F411E2006C2CD009D70C0 /* libGLEW.a */; };
-		A05F41202006C300009D70C0 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A00D10F51FF12CEF00AA43AE /* libglfw.3.3.dylib */; };
-		A05F41212006C339009D70C0 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F411E2006C2CD009D70C0 /* libGLEW.a */; };
 		A07D1EA02008FCBA00C2A4F8 /* bdfPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A07D1E9D2008F8E800C2A4F8 /* bdfPrinter.cpp */; };
 		A095981C20092BE100E5677A /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A095981A20092BE100E5677A /* image.cpp */; };
 		A0A546D21FEF03FF00C2984D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0A546D11FEF03FF00C2984D /* main.cpp */; };
@@ -23,6 +20,9 @@
 		A0D7EB9A2006BB1E00C566FA /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0060D9F1FFED57400DCB00E /* shader.cpp */; };
 		A0D7EB9F2006BC2600C566FA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A546DB1FEF059500C2984D /* Cocoa.framework */; };
 		A0D7EBA02006BC3600C566FA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A546D91FEF058800C2984D /* OpenGL.framework */; };
+		A0D8FE7721DE25540038E541 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D8FE7621DE25540038E541 /* libGLEW.a */; };
+		A0D8FE7821DE26B60038E541 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D8FE7621DE25540038E541 /* libGLEW.a */; };
+		A0D8FE7A21DE26D00038E541 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D8FE7921DE26D00038E541 /* libglfw.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +88,9 @@
 		A0D7EB902006B15200C566FA /* librgb_matrix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = librgb_matrix.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D7EB952006B1B600C566FA /* rgb_matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rgb_matrix.cpp; sourceTree = "<group>"; };
 		A0D7EB962006B1B600C566FA /* rgb_matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rgb_matrix.h; sourceTree = "<group>"; };
+		A0D8FE7621DE25540038E541 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../usr/local/lib/libGLEW.a; sourceTree = "<group>"; };
+		A0D8FE7921DE26D00038E541 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
+		A0DDB8BE21DF8B4B00A95AAB /* rpi-rgb-led-matrix */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "rpi-rgb-led-matrix"; path = "../../rpi-rgb-led-matrix"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,9 +98,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0D8FE7A21DE26D00038E541 /* libglfw.dylib in Frameworks */,
+				A0D8FE7821DE26B60038E541 /* libGLEW.a in Frameworks */,
 				A0D7EB942006B18100C566FA /* librgb_matrix.a in Frameworks */,
-				A05F41202006C300009D70C0 /* libglfw.3.3.dylib in Frameworks */,
-				A05F411F2006C2CE009D70C0 /* libGLEW.a in Frameworks */,
 				A05F411B2006C109009D70C0 /* OpenGL.framework in Frameworks */,
 				A05F411A2006C100009D70C0 /* Cocoa.framework in Frameworks */,
 			);
@@ -107,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A05F41212006C339009D70C0 /* libGLEW.a in Frameworks */,
+				A0D8FE7721DE25540038E541 /* libGLEW.a in Frameworks */,
 				A0D7EB9F2006BC2600C566FA /* Cocoa.framework in Frameworks */,
 				A0D7EBA02006BC3600C566FA /* OpenGL.framework in Frameworks */,
 			);
@@ -179,6 +182,7 @@
 				A0290A70211B780E0009D67B /* localControl.h */,
 				A0290A6F211B780E0009D67B /* localControl.cpp */,
 				A0D7EB992006B3D800C566FA /* rgb_matrix */,
+				A0DDB8BE21DF8B4B00A95AAB /* rpi-rgb-led-matrix */,
 			);
 			path = displayWrapper;
 			sourceTree = "<group>";
@@ -186,7 +190,9 @@
 		A0A546D81FEF058800C2984D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0D8FE7921DE26D00038E541 /* libglfw.dylib */,
 				A05F411E2006C2CD009D70C0 /* libGLEW.a */,
+				A0D8FE7621DE25540038E541 /* libGLEW.a */,
 				A00D10F51FF12CEF00AA43AE /* libglfw.3.3.dylib */,
 				A0A546DB1FEF059500C2984D /* Cocoa.framework */,
 				A0A546D91FEF058800C2984D /* OpenGL.framework */,
@@ -273,7 +279,7 @@
 		A0A546C61FEF03FF00C2984D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Christian Vessaz";
 				TargetAttributes = {
 					A0A546CD1FEF03FF00C2984D = {
@@ -344,6 +350,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -351,6 +358,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -399,6 +407,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -406,6 +415,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -439,8 +449,8 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /opt/local/include;
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -450,8 +460,8 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /opt/local/include;
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -462,10 +472,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = /opt/local/include;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/local/lib,
+					/usr/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -477,10 +487,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = /opt/local/include;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/local/lib,
+					/usr/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

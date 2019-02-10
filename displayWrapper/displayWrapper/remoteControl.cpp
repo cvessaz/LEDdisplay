@@ -27,7 +27,11 @@ void communicate() {
   setsockopt(socket_info,SOL_SOCKET,SO_RCVTIMEO,(char*)&timeout,sizeof(struct timeval));
 
   //assign values
-  server.sin_addr.s_addr = inet_addr("10.0.0.1"); // 127.0.0.1
+#ifdef __APPLE__
+  server.sin_addr.s_addr = inet_addr("127.0.0.1");
+#else
+  server.sin_addr.s_addr = inet_addr("10.0.0.1");
+#endif
   server.sin_family = AF_INET;
   server.sin_port = htons( 1111 );
 
