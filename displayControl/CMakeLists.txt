@@ -14,6 +14,7 @@ if(APPLE)
 else()
 	message("Build for RaspberryPi...")
 	add_definitions(-DRPI)
+	set(RPI TRUE)
 endif()
 
 ######################

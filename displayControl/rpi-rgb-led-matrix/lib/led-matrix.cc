@@ -72,14 +72,14 @@ private:
   RGBMatrix *const matrix_;
 };
 
-RGBMatrix::RGBMatrix(GPIO* io, const int &ScreenWidth, const int &ScreenHeight, const int &orientation)
+RGBMatrix::RGBMatrix(GPIO* io, const int &_ScreenWidth, const int &_ScreenHeight, const int &_orientation)
   : frame_(new Framebuffer(display_rows, 32 * display_chain)),
     io_(NULL), updater_(NULL) {
   Clear();
   SetGPIO(io);
-  ScreenWidth_ = ScreenWidth;
-  ScreenHeight_ = ScreenHeight;
-  orientation_ = orientation;
+  ScreenWidth = _ScreenWidth;
+  ScreenHeight = _ScreenHeight;
+  orientation = _orientation;
 }
 
 RGBMatrix::~RGBMatrix() {
@@ -116,9 +116,9 @@ int RGBMatrix::width() const { return frame_->width(); }
 int RGBMatrix::height() const { return frame_->height(); }
 void RGBMatrix::SetPixel(int x, int y,
                          uint8_t red, uint8_t green, uint8_t blue) {
-  if (x>=0 && x<ScreenWidth_ && y>=0 && y<ScreenHeight_) {
+  if (x>=0 && x<ScreenWidth && y>=0 && y<ScreenHeight) {
     int xo, yo;
-    switch (orientation_) {
+    switch (orientation) {
       case 0: // LEDdisplay::Landscape
         if (y<32) {
           xo = x+128;

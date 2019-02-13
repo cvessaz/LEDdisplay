@@ -18,6 +18,7 @@
 #ifndef RPI_RGBMATRIX_H
 #define RPI_RGBMATRIX_H
 
+#include <iostream>
 #include <stdint.h>
 #include "gpio.h"
 #include "canvas.h"
@@ -35,7 +36,7 @@ public:
   // tells many of these are daisy-chained together.
   // If "io" is not NULL, starts refreshing the screen immediately; you can
   // defer that by setting GPIO later with SetGPIO().
-  RGBMatrix(GPIO* io, const int &ScreenWidth, const int &ScreenHeight, const int &orientation);
+  RGBMatrix(GPIO* io, const int &_ScreenWidth, const int &_ScreenHeight, const int &_orientation);
   virtual ~RGBMatrix();
 
   // Set GPIO output if it was not set already in constructor (oterwise: no-op).
@@ -74,9 +75,11 @@ private:
   Framebuffer *frame_;
   GPIO *io_;
   UpdateThread *updater_;
-  int ScreenWidth_;
-  int ScreenHeight_;
-  int orientation_;
+
+public:
+  int ScreenWidth;
+  int ScreenHeight;
+  int orientation;
 };
 }  // end namespace rgb_matrix
 #endif  // RPI_RGBMATRIX_H

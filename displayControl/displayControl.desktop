@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=displayControl
+Exec=/home/pi/Documents/LEDdisplay/displayControl/startDisplayControl
