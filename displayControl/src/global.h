@@ -10,11 +10,11 @@
 #define global_h
 
 #include <mutex>
-#ifdef __APPLE__
-#include "bdfPrinter.h"
-#else
-#include "../../rpi-rgb-led-matrix/include/graphics.h"
+#ifdef RPI
+#include "graphics.h"
 using namespace rgb_matrix;
+#else
+#include "bdfPrinter.h"
 #endif
 
 struct Params {

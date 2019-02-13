@@ -9,11 +9,11 @@
 #ifndef localControl_h
 #define localControl_h
 
-#ifdef __APPLE__
-#include "rgb_matrix.h"
-#else
-#include "../../rpi-rgb-led-matrix/include/led-matrix.h"
+#ifdef RPI
+#include "led-matrix.h"
 using namespace rgb_matrix;
+#else
+#include "rgb_matrix.h"
 #endif
 
 void displayControl(RGBMatrix &canvas);

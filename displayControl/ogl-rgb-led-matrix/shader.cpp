@@ -17,7 +17,7 @@ using namespace std;
 GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path){
   
   // Relative path to product directory
-  std::string projectPath = "../../../displayWrapper/rgb_matrix/";
+  std::string projectPath = "./shaders/";
   
   // Create the shaders
   GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);

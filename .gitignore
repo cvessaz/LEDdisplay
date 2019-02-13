@@ -3,14 +3,8 @@
 *.a
 *.so
 other
-rpi-rgb-led-matrix/led-matrix
-rpi-rgb-led-matrix/minimal-example
-rpi-rgb-led-matrix/text-example
-rpi-rgb-led-matrix/bonzesPoste
-displayWrapper/Build/**
-displayWrapper/Index/**
-displayWrapper/displayWrapper/rgb_matrix/images/*
-displayWrapper/displayWrapper.xcodeproj/project.xcworkspace/**
-displayWrapper/displayWrapper.xcodeproj/xcuserdata/**
+displayControl/build/**
+displayControl/bin/**
+displayControl/ogl-rgb-led-matrix/images/**
 displayClient/displayClient.xcodeproj/project.xcworkspace/**
 displayClient/displayClient.xcodeproj/xcuserdata/**

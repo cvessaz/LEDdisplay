@@ -10,13 +10,13 @@
 #define data_h
 
 #include <vector>
-#ifdef __APPLE__
+#ifdef RPI
+#include "led-matrix.h"
+#include "graphics.h"
+using namespace rgb_matrix;
+#else
 #include "rgb_matrix.h"
 #include "bdfPrinter.h"
-#else
-#include "../../rpi-rgb-led-matrix/include/led-matrix.h"
-#include "../../rpi-rgb-led-matrix/include/graphics.h"
-using namespace rgb_matrix;
 #endif
 
 class Data {

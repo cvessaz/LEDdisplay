@@ -22,6 +22,9 @@
 #include "gpio.h"
 #include "canvas.h"
 
+#define display_rows 32
+#define display_chain 8
+
 namespace rgb_matrix {
 // The RGB matrix provides the framebuffer and the facilities to constantly
 // update the LED matrix.
@@ -32,7 +35,7 @@ public:
   // tells many of these are daisy-chained together.
   // If "io" is not NULL, starts refreshing the screen immediately; you can
   // defer that by setting GPIO later with SetGPIO().
-  RGBMatrix(GPIO *io, int rows = 32, int chained_displays = 1);
+  RGBMatrix(GPIO* io, const int &ScreenWidth, const int &ScreenHeight, const int &orientation);
   virtual ~RGBMatrix();
 
   // Set GPIO output if it was not set already in constructor (oterwise: no-op).
@@ -71,6 +74,9 @@ private:
   Framebuffer *frame_;
   GPIO *io_;
   UpdateThread *updater_;
+  int ScreenWidth_;
+  int ScreenHeight_;
+  int orientation_;
 };
 }  // end namespace rgb_matrix
 #endif  // RPI_RGBMATRIX_H

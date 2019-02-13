@@ -14,17 +14,14 @@
 Data::Data(RGBMatrix* _canvas, const int &_fontWidth, const int &_fontHeight) {
   canvas = _canvas;
   std::stringstream fontName;
-#ifndef __APPLE__
-  fontName << "./fonts/";
-#endif
-  fontName << _fontWidth << "x" << _fontHeight << ".bdf";
+  fontName << "./bdfFonts/" << _fontWidth << "x" << _fontHeight << ".bdf";
   bool found = font.LoadFont(fontName.str().c_str());
   assert(found);
   color = &params.color;
   text = &params.text;
   fontWidth = _fontWidth;
   fontHeight = _fontHeight;
-  xMax = std::max((int)text->size()*fontWidth,canvas->width());
+  xMax = std::max((int)text->size()*fontWidth,canvas->ScreenWidth);
   initialize();
 }
 

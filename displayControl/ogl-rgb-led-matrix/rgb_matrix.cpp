@@ -8,21 +8,19 @@
 
 #include "rgb_matrix.h"
 
-RGBMatrix::RGBMatrix() {
+RGBMatrix::RGBMatrix(GPIO* _io, const int &_ScreenWidth, const int &_ScreenHeight, const int &_orientation) {
+  ScreenWidth = _ScreenWidth;
+  ScreenHeight = _ScreenHeight;
+  g_vertex_buffer_data.resize(ScreenWidth*ScreenHeight*2*3*3);
+  g_color_buffer_data.resize(ScreenWidth*ScreenHeight*2*3*3);
   Initialize();
 }
 
 RGBMatrix::~RGBMatrix(){}
 
-int RGBMatrix::width() {
-  return ScreenWidth;
-}
-
-int RGBMatrix::height() {
-  return ScreenHeight;
-}
-
-void RGBMatrix::Clear(const int &x0, const int &y0, const int &nx, const int &ny) {
+void RGBMatrix::Clear(const int &x0, const int &y0, int nx, int ny) {
+  if (nx==0) nx = ScreenWidth;
+  if (ny==0) ny = ScreenHeight;
   for (int y=y0; y<y0+ny; ++y) {
     for (int x=x0; x<x0+nx; ++x) {
       int p = (y*ScreenWidth)+x;
@@ -101,7 +99,6 @@ int RGBMatrix::Initialize() {
   programID = LoadShaders("vertexShader.vsgl", "fragmentShader.fsgl" );
   
   // An array of pixel vertices (2triangles per pixel)
-  GLfloat g_vertex_buffer_data[ScreenWidth*ScreenHeight*2*3*3];
   float dx = 2.0f/(float)ScreenWidth;
   float dy = 2.0f/(float)ScreenHeight;
   for (int y=0; y<ScreenHeight; ++y) {
@@ -146,7 +143,7 @@ int RGBMatrix::Initialize() {
   // The following commands will talk about our 'vertexbuffer' buffer
   glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
   // Give our vertices to OpenGL.
-  glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, g_vertex_buffer_data.size()*sizeof(GLfloat), &g_vertex_buffer_data[0], GL_STATIC_DRAW);
   
   // One color for each vertex. They were generated randomly.
   for (int y=0; y<ScreenHeight; ++y) {
@@ -167,7 +164,7 @@ int RGBMatrix::Initialize() {
   
   glGenBuffers(1, &colorbuffer);
   glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, g_color_buffer_data.size()*sizeof(GLfloat), &g_color_buffer_data[0], GL_STATIC_DRAW);
   
   UpdateScreen();
   
@@ -222,12 +219,12 @@ void RGBMatrix::Refresh() {
   // Copy data to GPU
   glGenBuffers(1, &colorbuffer);
   glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, g_color_buffer_data.size()*sizeof(GLfloat), &g_color_buffer_data[0], GL_STATIC_DRAW);
   // Draw
   UpdateScreen();
 }
 
-void RGBMatrix::Save(const int &frame) {
+void RGBMatrix::Save(int frame) {
   char numstr[6];
   sprintf(numstr, "_%.4d", frame);
   std::string pngname = "../../../displayWrapper/rgb_matrix/images/image" + std::string(numstr) + ".png";

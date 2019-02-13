@@ -72,11 +72,14 @@ private:
   RGBMatrix *const matrix_;
 };
 
-RGBMatrix::RGBMatrix(GPIO *io, int rows, int chained_displays)
-  : frame_(new Framebuffer(rows, 32 * chained_displays)),
+RGBMatrix::RGBMatrix(GPIO* io, const int &ScreenWidth, const int &ScreenHeight, const int &orientation)
+  : frame_(new Framebuffer(display_rows, 32 * display_chain)),
     io_(NULL), updater_(NULL) {
   Clear();
   SetGPIO(io);
+  ScreenWidth_ = ScreenWidth;
+  ScreenHeight_ = ScreenHeight;
+  orientation_ = orientation;
 }
 
 RGBMatrix::~RGBMatrix() {
@@ -113,32 +116,36 @@ int RGBMatrix::width() const { return frame_->width(); }
 int RGBMatrix::height() const { return frame_->height(); }
 void RGBMatrix::SetPixel(int x, int y,
                          uint8_t red, uint8_t green, uint8_t blue) {
-#if 1 // Re-orient x,y
-#if 1 // DisplayText
-  int xo, yo;
-  if (y<32) {
-    xo = x+128;
-    yo = y;
+  if (x>=0 && x<ScreenWidth_ && y>=0 && y<ScreenHeight_) {
+    int xo, yo;
+    switch (orientation_) {
+      case 0: // LEDdisplay::Landscape
+        if (y<32) {
+          xo = x+128;
+          yo = y;
+        }
+        else {
+          xo = 127-x;
+          yo = 63-y;
+        }
+        break;
+      case 1: // LEDdisplay::portrait
+        if (x<32) {
+          xo = 127-y;
+          yo = x;
+        }
+        else {
+          xo = y+128;
+          yo = 63-x;
+        }
+        break;
+      default:
+        xo = x;
+        yo= y;
+        break;
+    }
+    frame_->SetPixel(xo, yo, red, green, blue);
   }
-  else {
-    xo = 127-x;
-    yo = 63-y;
-  }
-#else // BonzesPoste
-  int xo, yo;
-  if (x<32) {
-    xo = 127-y;
-    yo = x;
-  }
-  else {
-    xo = y+128;
-    yo = 63-x;
-  }
-#endif
-  frame_->SetPixel(xo, yo, red, green, blue);
-#else
-  frame_->SetPixel(x, y, red, green, blue);
-#endif
 }
 void RGBMatrix::Clear() { return frame_->Clear(); }
 void RGBMatrix::Clear(const int &x0, const int &y0, const int &nx, const int &ny) {

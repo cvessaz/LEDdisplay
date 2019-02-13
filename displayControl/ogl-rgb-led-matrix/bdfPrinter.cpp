@@ -44,7 +44,7 @@ Font::~Font() {
 
 // TODO: that might not be working for all input files yet.
 bool Font::LoadFont(const char *font) {
-  std::string path = "../../../displayWrapper/rgb_matrix/bdfFont/" + std::string(font);
+  std::string path = std::string(font);
   
   if (!path.c_str() || !*path.c_str()) return false;
   FILE *f = fopen(path.c_str(), "r");
